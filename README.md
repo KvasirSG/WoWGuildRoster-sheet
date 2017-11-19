@@ -1,5 +1,6 @@
 # WoWGuildRoster-sheet
 - Author: Kenneth Heimann(KvasirSG)
+- contributor: SpBonez
 - Created for: Dude Where is my mana (WoW Guild) [Formerly]
 
 ## Author's Note
