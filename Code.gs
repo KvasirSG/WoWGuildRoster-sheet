@@ -1,5 +1,6 @@
 function myFunction() {
-  var spreadsheet = SpreadsheetApp.openById("111YiB6abs6jXGn2YmFLaw6HxKhfriyvn-GquRkATiuc");
+  var sheet_ID = "ID"
+  var spreadsheet = SpreadsheetApp.openById(sheet_ID);
   var sheet = SpreadsheetApp.setActiveSheet(spreadsheet.getSheets()[0]);
   var data = sheet.getDataRange().getValues();
   var realm_name = "REALM";
