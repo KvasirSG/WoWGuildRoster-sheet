@@ -1,9 +1,9 @@
 function myFunction() {
-  var spreadsheet = SpreadsheetApp.openById("ID");
+  var spreadsheet = SpreadsheetApp.openById("111YiB6abs6jXGn2YmFLaw6HxKhfriyvn-GquRkATiuc");
   var sheet = SpreadsheetApp.setActiveSheet(spreadsheet.getSheets()[0]);
   var data = sheet.getDataRange().getValues();
-  var realm_name = "realmname";
-  var API_KEY = "Blizzard API_KEY";
+  var realm_name = "REALM";
+  var API_KEY = "Blizzard API KEY";
   for (var i = 1; i < data.length; i++) {
     var bob = i + 1;
     
@@ -14,7 +14,7 @@ function myFunction() {
       SpreadsheetApp.getActiveSheet().getRange('E'+bob).setValue(thistoonspecrole(data[i][0],realm_name,API_KEY));
       SpreadsheetApp.getActiveSheet().getRange('G'+bob).setValue(ilvl(data[i][0],realm_name,API_KEY));
       SpreadsheetApp.getActiveSheet().getRange('H'+bob).setValue(ilvleqpt(data[i][0],realm_name,API_KEY));
-      var myhyperlink = "https://worldofwarcraft.com/en-gb/character/"realm_name"/"+thistoon(data[i][0],realm_name,API_KEY);
+      var myhyperlink = "https://worldofwarcraft.com/en-gb/character/"+realm_name+"/"+thistoon(data[i][0],realm_name,API_KEY);
       SpreadsheetApp.getActiveSheet().getRange('J'+bob).setValue('=HYPERLINK("'+myhyperlink+'")');
       SpreadsheetApp.getActiveSheet().getRange('I'+bob).setValue(thistoonrank(data[i][0],realm_name,API_KEY));
       
