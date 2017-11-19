@@ -1,6 +1,6 @@
 # WoWGuildRoster-sheet
 - Author: Kenneth Heimann(KvasirSG)
-- Created for: Dude Where is my mana (WoW Guild) [Formaly]
+- Created for: Dude Where is my mana (WoW Guild) [Formerly]
 
 ## Author's Note
 I designed a googlesheet with GoogleScript and Blizzard WoW API to make an interactive WoW Raid Roster.
