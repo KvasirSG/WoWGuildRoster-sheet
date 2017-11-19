@@ -1,20 +1,23 @@
 function myFunction() {
-  var spreadsheet = SpreadsheetApp.openById("ID");
+  var sheet_ID = "ID"
+  var spreadsheet = SpreadsheetApp.openById(sheet_ID);
   var sheet = SpreadsheetApp.setActiveSheet(spreadsheet.getSheets()[0]);
   var data = sheet.getDataRange().getValues();
+  var realm_name = "REALM";
+  var API_KEY = "Blizzard API KEY";
   for (var i = 1; i < data.length; i++) {
     var bob = i + 1;
     
  
     try {
-      SpreadsheetApp.getActiveSheet().getRange('B'+bob).setValue(thistoonclass(data[i][0],"kazzak"));
-      SpreadsheetApp.getActiveSheet().getRange('C'+bob).setValue(thistoonspec(data[i][0],"kazzak"));
-      SpreadsheetApp.getActiveSheet().getRange('E'+bob).setValue(thistoonspecrole(data[i][0],"kazzak"));
-      SpreadsheetApp.getActiveSheet().getRange('G'+bob).setValue(ilvl(data[i][0],"kazzak"));
-      SpreadsheetApp.getActiveSheet().getRange('H'+bob).setValue(ilvleqpt(data[i][0],"kazzak"));
-      var myhyperlink = "https://worldofwarcraft.com/en-gb/character/kazzak/"+thistoon(data[i][0],"kazzak");
+      SpreadsheetApp.getActiveSheet().getRange('B'+bob).setValue(thistoonclass(data[i][0],realm_name,API_KEY));
+      SpreadsheetApp.getActiveSheet().getRange('C'+bob).setValue(thistoonspec(data[i][0],realm_name,API_KEY));
+      SpreadsheetApp.getActiveSheet().getRange('E'+bob).setValue(thistoonspecrole(data[i][0],realm_name,API_KEY));
+      SpreadsheetApp.getActiveSheet().getRange('G'+bob).setValue(ilvl(data[i][0],realm_name,API_KEY));
+      SpreadsheetApp.getActiveSheet().getRange('H'+bob).setValue(ilvleqpt(data[i][0],realm_name,API_KEY));
+      var myhyperlink = "https://worldofwarcraft.com/en-gb/character/"+realm_name+"/"+thistoon(data[i][0],realm_name,API_KEY);
       SpreadsheetApp.getActiveSheet().getRange('J'+bob).setValue('=HYPERLINK("'+myhyperlink+'")');
-      SpreadsheetApp.getActiveSheet().getRange('I'+bob).setValue(thistoonrank(data[i][0]));
+      SpreadsheetApp.getActiveSheet().getRange('I'+bob).setValue(thistoonrank(data[i][0],realm_name,API_KEY));
       
     } catch(e) {
       Logger.log("Couldn't find data from: "+ data[i][0]);
@@ -22,11 +25,11 @@ function myFunction() {
   
   } 
 }
-function ilvleqpt(toonName,realmName) {
+function ilvleqpt(toonName,realmName,API_KEY) {
 //function ilvl(toonName,realmName) {
 
 // Character information
-var toonJSON = UrlFetchApp.fetch("https://eu.api.battle.net/wow/character/"+realmName+"/"+toonName+"?fields=items&locale=en_GB&apikey=API_KEY");
+var toonJSON = UrlFetchApp.fetch("https://eu.api.battle.net/wow/character/"+realmName+"/"+toonName+"?fields=items&locale=en_GB&apikey=" + API_KEY);
 var toon = Utilities.jsonParse(toonJSON.getContentText());
   Utilities.sleep(500);
 
@@ -40,11 +43,11 @@ Logger.log(toonIlvl);
 return toonIlvl;
 }
 
-function ilvl(toonName,realmName) {
+function ilvl(toonName,realmName,API_KEY) {
 //function ilvl(toonName,realmName) {
 
 // Character information
-var toonJSON = UrlFetchApp.fetch("https://eu.api.battle.net/wow/character/"+realmName+"/"+toonName+"?fields=items&locale=en_GB&apikey=API_KEY");
+var toonJSON = UrlFetchApp.fetch("https://eu.api.battle.net/wow/character/"+realmName+"/"+toonName+"?fields=items&locale=en_GB&apikey="+API_KEY);
 var toon = Utilities.jsonParse(toonJSON.getContentText());
    Utilities.sleep(500);
 
@@ -58,11 +61,11 @@ Logger.log(toonIlvl);
 return toonIlvl;
 }
 
-function thistoon(toonName,realmName) {
+function thistoon(toonName,realmName,API_KEY) {
 //function ilvl(toonName,realmName) {
 
 // Character information
-var toonJSON = UrlFetchApp.fetch("https://eu.api.battle.net/wow/character/"+realmName+"/"+toonName+"?locale=en_GB&apikey=API_KEY");
+var toonJSON = UrlFetchApp.fetch("https://eu.api.battle.net/wow/character/"+realmName+"/"+toonName+"?locale=en_GB&apikey="+API_KEY);
 var toon = Utilities.jsonParse(toonJSON.getContentText());
    Utilities.sleep(500);
 
@@ -76,11 +79,11 @@ Logger.log(toonIlvl);
 return toonIlvl;
 }
 
-function thistoonclass(toonName,realmName) {
+function thistoonclass(toonName,realmName,API_KEY) {
 //function ilvl(toonName,realmName) {
 
 // Character information
-var toonJSON = UrlFetchApp.fetch("https://eu.api.battle.net/wow/character/"+realmName+"/"+toonName+"?locale=en_GB&apikey=API_KEY");
+var toonJSON = UrlFetchApp.fetch("https://eu.api.battle.net/wow/character/"+realmName+"/"+toonName+"?locale=en_GB&apikey="+API_KEY);
 var id_to_class = {
 	1 : "Warrior",
 	2 : "Paladin",
@@ -108,11 +111,11 @@ Logger.log(toonIlvl);
 return  id_to_class[toonIlvl];
 }
 
-function thistoonspec(toonName,realmName) {
+function thistoonspec(toonName,realmName,API_KEY) {
 //function ilvl(toonName,realmName) {
 
 // Character information
-var toonJSON = UrlFetchApp.fetch("https://eu.api.battle.net/wow/character/"+realmName+"/"+toonName+"?fields=talents&locale=en_GB&apikey=API_KEY");
+var toonJSON = UrlFetchApp.fetch("https://eu.api.battle.net/wow/character/"+realmName+"/"+toonName+"?fields=talents&locale=en_GB&apikey="+API_KEY);
 var toon = Utilities.jsonParse(toonJSON.getContentText());
    Utilities.sleep(500);
 
@@ -123,11 +126,11 @@ var sheet = SpreadsheetApp.getActiveSheet();
 Logger.log(pritalent);
 return pritalent;
 }
-function thistoonspecrole(toonName,realmName) {
+function thistoonspecrole(toonName,realmName,API_KEY) {
 //function ilvl(toonName,realmName) {
 
 // Character information
-var toonJSON = UrlFetchApp.fetch("https://eu.api.battle.net/wow/character/"+realmName+"/"+toonName+"?fields=talents&locale=en_GB&apikey=API_KEY");
+var toonJSON = UrlFetchApp.fetch("https://eu.api.battle.net/wow/character/"+realmName+"/"+toonName+"?fields=talents&locale=en_GB&apikey="+API_KEY);
 var toon = Utilities.jsonParse(toonJSON.getContentText());
    Utilities.sleep(500);
 
@@ -138,11 +141,11 @@ var sheet = SpreadsheetApp.getActiveSheet();
 Logger.log(pritalent);
 return pritalent;
 }
-function thistoonrank(toonName) {
+function thistoonrank(toonName,realm_name,API_KEY) {
 //function ilvl(toonName,realmName) {
 
 // Character information
-var guildJSON = UrlFetchApp.fetch("https://eu.api.battle.net/wow/guild/kazzak/dude%20where%20is%20my%20mana?fields=members&locale=en_GB&apikey=API_KEY");
+var guildJSON = UrlFetchApp.fetch("https://eu.api.battle.net/wow/guild/"+realm_name+"/guild%20name?fields=members&locale=en_GB&apikey="+API_KEY);
 var guild = Utilities.jsonParse(guildJSON.getContentText());
    Utilities.sleep(500);
 
